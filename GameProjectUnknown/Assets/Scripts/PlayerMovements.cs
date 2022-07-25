@@ -5,9 +5,17 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField]private float speed;
     [SerializeField]private float jumpDistance;
     private Rigidbody2D body;
+    private Animator animate;
+
+
 
     private void Awake(){
+        //Grap references for rigidbody and animator from objects
         body = GetComponent<Rigidbody2D>();
+        animate = GetComponent<Animator>();
+    
+
+
     }
 
     private void Update(){
@@ -22,6 +30,11 @@ public class PlayerMovements : MonoBehaviour
         //jumping command
         if(Input.GetKey(KeyCode.Space))
             body.velocity = new Vector2(body.velocity.x, jumpDistance);
+
+        //set animator parameters
+        animate.SetBool("run", horizantalInput != 0);
+
+
     }
 
     
