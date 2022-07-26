@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 250462131}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -371,7 +371,7 @@ PrefabInstance:
     - target: {fileID: 3930902628822965279, guid: d1a580a7df6abb64e9bf8caefe8b5ec8, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: cfb0994800bda9d46ac37ca2d06f5c51, type: 3}
+      objectReference: {fileID: 21300000, guid: b7297c1f2406fc74eaedd34307edb24b, type: 3}
     - target: {fileID: 4109228561856665588, guid: d1a580a7df6abb64e9bf8caefe8b5ec8, type: 3}
       propertyPath: m_RootOrder
       value: 1
