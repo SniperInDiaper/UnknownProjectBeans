@@ -38,13 +38,15 @@ public class PlayerMovements : MonoBehaviour
 
         //set animator parameters
         animate.SetBool("run", horizantalInput != 0);
-        animate.SetBool("Grounded", grounded);
+        animate.SetBool("grounded", grounded);
+        
 
 
     }
         //Jumping function
     private void Jump(){
          body.velocity = new Vector2(body.velocity.x, jumpDistance);
+         animate.SetTrigger("Jump");
          grounded = false;
     }
         /*This is a function to detect if the player is on the ground by checking
