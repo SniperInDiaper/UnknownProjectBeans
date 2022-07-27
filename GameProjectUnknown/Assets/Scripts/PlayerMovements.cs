@@ -4,9 +4,10 @@ public class PlayerMovements : MonoBehaviour
 {
     [SerializeField]private float speed;
     [SerializeField]private float jumpDistance; 
+    [SerializeField]private LayerMask groundLayer; //LayerMask are used to separate collision entetities 
     private Rigidbody2D body; //Used for rigid body and physics over the player's body
     private Animator animate; //Variable for the animation 
-    private bool grounded; //true if the player is on the ground and false otherwise
+    private BoxCollider2D boxCollider; //Initiate for box collider
 
 
     //awake method is activated once at the beginning of the game
@@ -14,6 +15,7 @@ public class PlayerMovements : MonoBehaviour
         //Grap references for rigidbody and animator from objects
         body = GetComponent<Rigidbody2D>();
         animate = GetComponent<Animator>();
+        boxCollider = GetComponent<BoxCollider2D>();
     
 
 
@@ -31,14 +33,14 @@ public class PlayerMovements : MonoBehaviour
 
 
         //jumping command
-        if(Input.GetKey(KeyCode.Space) && grounded)
+        if(Input.GetKey(KeyCode.Space) && isGrounded())
            Jump();
 
 
 
         //set animator parameters
         animate.SetBool("run", horizantalInput != 0);
-        animate.SetBool("grounded", grounded);
+        animate.SetBool("grounded", isGrounded());
         
 
 
@@ -47,7 +49,6 @@ public class PlayerMovements : MonoBehaviour
     private void Jump(){
          body.velocity = new Vector2(body.velocity.x, jumpDistance);
          animate.SetTrigger("Jump");
-         grounded = false;
     }
         /*This is a function to detect if the player is on the ground by checking
          if there is collision between the player and gameObject tagged with Ground*/
@@ -55,7 +56,20 @@ public class PlayerMovements : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision){
         
-        if(collision.gameObject.tag == "Ground")
-            grounded = true;
     }
+
+    private bool isGrounded()
+    {
+        /* RaycastHit2D is used to cast a light of the object to determine something.
+        BoxCasting is used to check the collosion box instead of casting a ray.
+         the parameters are (Origin of the box, Size of the box, Angle of the box, Direction, distance of the vertiual box from the object, Layer mask)*/
+        RaycastHit2D ray = Physics2D.BoxCast(boxCollider.bounds.center,boxCollider.bounds.size,0,Vector2.down, 0.1f, groundLayer);
+        return ray.collider != null;
+    }
+
+
+
+
+
+
 }
