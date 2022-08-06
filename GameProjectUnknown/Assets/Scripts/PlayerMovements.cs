@@ -40,12 +40,12 @@ public class PlayerMovements : MonoBehaviour
         //wall jumps logic
         if(wallJumpCooldown > 0.2f)
         {
-             body.velocity = new Vector2(horizantalInput * speed,body.velocity.y);
+             body.velocity = new Vector2(horizantalInput * jumpDistance,body.velocity.y);
 
              if(onWall() && !isGrounded())
              {
-                body.gravityScale = 0;
-                body.velocity = Vector2.zero;
+                body.gravityScale = 0.75f;
+                body.velocity = Vector2.down;
              }else 
                     body.gravityScale = 1.75f;
             
@@ -77,11 +77,11 @@ public class PlayerMovements : MonoBehaviour
         {
             if(horizantalInput == 0)
             {
-                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, 0);
-                 transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x) , transform.localScale.y, transform.localScale.z);
+                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 0);
+                 transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x) , transform.localScale.y, transform.localScale.z);//This is responsible for flipping the direction the player is facing.
             }
             else
-                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
+                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 8, 8); //This is responsible for the jumping of the wall mechanism. 
 
             wallJumpCooldown = 0;
         }
