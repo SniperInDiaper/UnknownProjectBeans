@@ -65,7 +65,7 @@ public class PlayerMovements : MonoBehaviour
 
 
     }
-        //Jumping function
+    //Jumping function
     private void Jump()
     {   
         if(isGrounded())
@@ -90,9 +90,7 @@ public class PlayerMovements : MonoBehaviour
          if there is collision between the player and gameObject tagged with Ground*/
     
 
-    private void OnCollisionEnter2D(Collision2D collision){
-        
-    }
+    
 
     private bool isGrounded()
     {
@@ -109,6 +107,12 @@ public class PlayerMovements : MonoBehaviour
          the parameters are (Origin of the box, Size of the box, Angle of the box, Direction, distance of the vertiual box from the object, Layer mask)*/
         RaycastHit2D ray = Physics2D.BoxCast(boxCollider.bounds.center,boxCollider.bounds.size,0,new Vector2(transform.localScale.x,0), 0.1f, wallLayer);
         return ray.collider != null;
+    }
+
+    public bool canAttack()
+    {
+        return horizantalInput == 0 && isGrounded() && !onWall();
+
     }
 
 
